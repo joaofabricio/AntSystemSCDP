@@ -9,7 +9,7 @@ public class Column {
 	
 	private Double cost;
 	
-	private List<Line> linhas = new ArrayList<Line>();
+	private List<Line> lines = new ArrayList<Line>();
 	
 	public Column(String rotulo, Double custo) {
 		this.label = rotulo;
@@ -32,8 +32,8 @@ public class Column {
 		this.cost = cost;
 	}
 	
-	public void addLinha(Line l) {
-		linhas.add(l);
+	public void addLine(Line l) {
+		lines.add(l);
 	}
 
 }

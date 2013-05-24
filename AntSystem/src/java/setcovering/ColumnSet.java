@@ -3,7 +3,7 @@ package setcovering;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Conjunto {
+public class ColumnSet {
 	
 	private List<Column> columns = new ArrayList<Column>();
 	

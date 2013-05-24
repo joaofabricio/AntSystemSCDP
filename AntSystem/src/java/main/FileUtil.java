@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 import main.InvalidFileException;
 import setcovering.Column;
-import setcovering.Conjunto;
+import setcovering.ColumnSet;
 import setcovering.Line;
 
 public class FileUtil {
 	
-	public static Conjunto readFile(String fileName) {
-		Conjunto conjunto = new Conjunto();
+	public static ColumnSet readFile(String fileName) {
+		ColumnSet conjunto = new ColumnSet();
 		
 		List<String> fileLines = separaLinhasArquivo(fileName);
 		
@@ -28,7 +28,7 @@ public class FileUtil {
 		return conjunto;
 	}
 
-	private static Conjunto treatData(Conjunto conjunto, List<String> fileLines) {
+	private static ColumnSet treatData(ColumnSet conjunto, List<String> fileLines) {
 		if (!(fileLines.size() == conjunto.getAmountColumns() + 3)) {
 			throw new InvalidFileException("As linhas restantes do arquivo devem conter os dados precedidos pela linha \"DADOS\"");
 		}
@@ -50,7 +50,7 @@ public class FileUtil {
 			int index = 1;
 			while (index++ < dataLines.length-1) {
 				Line linha = new Line(dataLines[index]);
-				column.addLinha(linha);
+				column.addLine(linha);
 			}
 			
 			conjunto.addColumn(column);
@@ -58,7 +58,7 @@ public class FileUtil {
 		return conjunto;
 	}
 
-	private static Conjunto treatLineOne(Conjunto conjunto, List<String> fileLines) {
+	private static ColumnSet treatLineOne(ColumnSet conjunto, List<String> fileLines) {
 		String lineOne = fileLines.get(1);
 		if (!Pattern.matches("COLUNAS\\s+\\d+", lineOne)) {
 			throw new InvalidFileException("A segunda linha deve ser no formato \"COLUNAS 10\"");
@@ -68,7 +68,7 @@ public class FileUtil {
 		return conjunto;
 	}
 
-	private static Conjunto treatLineZero(Conjunto conjunto, List<String> fileLines) {
+	private static ColumnSet treatLineZero(ColumnSet conjunto, List<String> fileLines) {
 		String lineZero = fileLines.get(0);
 		if (!Pattern.matches("LINHAS\\s+\\d+", lineZero)) {
 			throw new InvalidFileException("A primeira linha deve ser no formato \"LINHAS 10\"");

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import setcovering.Column;
-import setcovering.Conjunto;
+import setcovering.ColumnSet;
 
 public class FileUtilTest {
 	
@@ -13,7 +13,7 @@ public class FileUtilTest {
 
 	@Test
 	public void testReadFile12_6() {
-		Conjunto c = FileUtil.readFile("test/resources/InputFileExample-12-6.dat");
+		ColumnSet c = FileUtil.readFile("test/resources/InputFileExample-12-6.dat");
 		
 		assertEquals(12, c.getAmountColumns());
 		
@@ -26,7 +26,7 @@ public class FileUtilTest {
 
 	@Test
 	public void testReadFile7_3() {
-		Conjunto c = FileUtil.readFile("test/resources/InputFileExample-7-3.dat");
+		ColumnSet c = FileUtil.readFile("test/resources/InputFileExample-7-3.dat");
 		
 		assertEquals(7, c.getAmountColumns());
 		

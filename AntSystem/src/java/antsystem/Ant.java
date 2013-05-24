@@ -7,11 +7,13 @@ import setcovering.Column;
 
 public class Ant {
 	
-	public Ant(Column initialColumn) {
-	}
-
 	private Double cost;
 	
 	private List<Column> solution = new ArrayList<Column>();
+
+	public List<Column> run() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
