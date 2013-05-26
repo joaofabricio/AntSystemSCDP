@@ -4,10 +4,8 @@ import setcovering.Column;
 
 public class Pheromone {
 	
-	private Column column;
-
-	public Pheromone(Column column) {
-		this.column = column;
+	public Pheromone(Column column, Ant ant) {
+		column.setPheromone(this);
 	}
 	
 	public Double value;
@@ -20,8 +18,4 @@ public class Pheromone {
 		value--;
 	}
 
-	public Column getColumn() {
-		return column;
-	}
-	
 }

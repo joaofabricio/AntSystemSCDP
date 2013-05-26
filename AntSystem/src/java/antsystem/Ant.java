@@ -1,17 +1,14 @@
 package antsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import setcovering.Column;
+import setcovering.ColumnSet;
 
 public class Ant {
 	
-	private Double cost;
-	
-	private List<Column> solution = new ArrayList<Column>();
+	public Ant(ColumnSet columnSet) {
+		// TODO Auto-generated constructor stub
+	}
 
-	public List<Column> run() {
+	public ColumnSet run() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import main.InvalidFileException;
 import setcovering.Column;
 import setcovering.ColumnSet;
 import setcovering.Line;
@@ -19,35 +18,44 @@ public class FileUtil {
 		
 		List<String> fileLines = separaLinhasArquivo(fileName);
 		
-		conjunto = treatLineZero(conjunto, fileLines);
-		
-		conjunto = treatLineOne(conjunto, fileLines);
-		
-		conjunto = treatData(conjunto, fileLines);
-		
-		return conjunto;
-	}
+		String lineZero = fileLines.get(0);
+		if (!Pattern.matches("LINHAS\\s+\\d+", lineZero)) {
+			throw new InvalidFileException("A primeira linha deve ser no formato \"LINHAS 10\"");
+		}
+//		String lineZeroData[] = lineZero.split("\\s+");
+//		conjunto.setAmountLines(Integer.parseInt(lineZeroData[1]));
+//		Integer amountLines = Integer.parseInt(lineZeroData[1]);
 
-	private static ColumnSet treatData(ColumnSet conjunto, List<String> fileLines) {
-		if (!(fileLines.size() == conjunto.getAmountColumns() + 3)) {
+		String lineOne = fileLines.get(1);
+		if (!Pattern.matches("COLUNAS\\s+\\d+", lineOne)) {
+			throw new InvalidFileException("A segunda linha deve ser no formato \"COLUNAS 10\"");
+		}
+		String lineOneData[] = lineOne.split("\\s+");
+		Integer amountColumns = Integer.parseInt(lineOneData[1]);
+//		conjunto = treatLineOne(conjunto, fileLines);
+		
+		if (!(fileLines.size() == amountColumns + 3)) {
 			throw new InvalidFileException("As linhas restantes do arquivo devem conter os dados precedidos pela linha \"DADOS\"");
 		}
 		
-		for (int i = 3; i < conjunto.getAmountColumns()+3; i++) {
+		for (int i = 3; i < amountColumns+3; i++) {
 			
 			String[] dataLines = fileLines.get(i).split("\\s+");
-			
-			String rotulo = dataLines[0];
-			Double cost = Double.parseDouble(dataLines[1]);
-			
-			Column column = new Column(rotulo, cost);
-			
 			
 			if (dataLines.length < 3) {
 				throw new InvalidFileException("Cada coluna deve cobrir pelo menos uma linha. Corrija a linha "+i);
 			}
 			
-			int index = 1;
+			int index = 0;
+			if (dataLines[0].trim().length() == 0) {
+				index = 1;
+			}
+			
+			String rotulo = dataLines[index++];
+			Double cost = Double.parseDouble(dataLines[index++]);
+			
+			Column column = new Column(rotulo, cost);
+			
 			while (index++ < dataLines.length-1) {
 				Line linha = new Line(dataLines[index]);
 				column.addLine(linha);
@@ -55,26 +63,7 @@ public class FileUtil {
 			
 			conjunto.addColumn(column);
 		}
-		return conjunto;
-	}
-
-	private static ColumnSet treatLineOne(ColumnSet conjunto, List<String> fileLines) {
-		String lineOne = fileLines.get(1);
-		if (!Pattern.matches("COLUNAS\\s+\\d+", lineOne)) {
-			throw new InvalidFileException("A segunda linha deve ser no formato \"COLUNAS 10\"");
-		}
-		String lineOneData[] = lineOne.split("\\s+");
-		conjunto.setAmountColumns(Integer.parseInt(lineOneData[1]));
-		return conjunto;
-	}
-
-	private static ColumnSet treatLineZero(ColumnSet conjunto, List<String> fileLines) {
-		String lineZero = fileLines.get(0);
-		if (!Pattern.matches("LINHAS\\s+\\d+", lineZero)) {
-			throw new InvalidFileException("A primeira linha deve ser no formato \"LINHAS 10\"");
-		}
-		String lineZeroData[] = lineZero.split("\\s+");
-		conjunto.setAmountLines(Integer.parseInt(lineZeroData[1]));
+		
 		return conjunto;
 	}
 

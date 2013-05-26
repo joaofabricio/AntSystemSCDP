@@ -1,10 +1,9 @@
 package main;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import setcovering.Column;
 import setcovering.ColumnSet;
 
 public class FileUtilTest {
@@ -15,11 +14,9 @@ public class FileUtilTest {
 	public void testReadFile12_6() {
 		ColumnSet c = FileUtil.readFile("test/resources/InputFileExample-12-6.dat");
 		
-		assertEquals(12, c.getAmountColumns());
-		
-		assertEquals(6, c.getAmountLines());
-		
 		assertEquals(12, c.getColumns().size());
+		
+		assertEquals(new Double(71), c.getCost());
 	}
 	
 	
@@ -28,19 +25,9 @@ public class FileUtilTest {
 	public void testReadFile7_3() {
 		ColumnSet c = FileUtil.readFile("test/resources/InputFileExample-7-3.dat");
 		
-		assertEquals(7, c.getAmountColumns());
-		
-		assertEquals(3, c.getAmountLines());
-		
 		assertEquals(7, c.getColumns().size());
 		
-		
-		Double cost = 0d;
-		for (Column column: c.getColumns()) {
-			cost = column.getCost();
-		}
-		
-		assertTrue(cost.equals(7d));
+		assertEquals(new Double(7), c.getCost());
 		
 	}
 
