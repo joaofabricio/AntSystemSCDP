@@ -1,5 +1,6 @@
 package antsystem;
 
+import setcovering.Column;
 import setcovering.ColumnSet;
 
 
@@ -41,6 +42,7 @@ public class AntSystemSCP {
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;
 				}
+				
 			}
 		}
 		
