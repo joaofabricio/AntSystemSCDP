@@ -1,6 +1,5 @@
 package antsystem;
 
-import setcovering.Column;
 import setcovering.ColumnSet;
 
 
@@ -14,7 +13,7 @@ public class AntSystemSCP {
 	
 	private Integer maxIter;
 	
-	private Long q;
+	private Double q;
 	
 	private Integer antPopulation = 50;
 
@@ -22,10 +21,10 @@ public class AntSystemSCP {
 						Double beta, 
 						Double ro, 
 						Integer maxIter, 
-						Long q) {
+						Double q) {
 		this.alfa = alfa;
 		this.beta = beta;
-		this.ro = ro;
+		this.ro = ro;//entre 0 e 1 - evaporacao 0,7 ~ 0,8
 		this.maxIter = maxIter;
 		this.q = q;
 	}
@@ -37,7 +36,7 @@ public class AntSystemSCP {
 		for (int i = 0; i < maxIter; i++) {
 			for (int f = 0; f < antPopulation; f++) {
 				Ant ant  = new Ant(totalColumns);
-				ColumnSet partialSolution = ant.run();
+				ColumnSet partialSolution = ant.run(alfa, beta, ro, q);
 				
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;

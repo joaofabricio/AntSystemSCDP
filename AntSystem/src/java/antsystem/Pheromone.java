@@ -5,7 +5,7 @@ import setcovering.Column;
 public class Pheromone {
 	
 	public Pheromone(Column column, Ant ant) {
-		column.setPheromone(this);
+//		column.setPheromone(this);
 	}
 	
 	public Double value;

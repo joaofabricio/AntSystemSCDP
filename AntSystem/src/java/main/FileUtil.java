@@ -14,7 +14,6 @@ import setcovering.Line;
 public class FileUtil {
 	
 	public static ColumnSet readFile(String fileName) {
-		ColumnSet conjunto = new ColumnSet();
 		
 		List<String> fileLines = separaLinhasArquivo(fileName);
 		
@@ -22,8 +21,8 @@ public class FileUtil {
 		if (!Pattern.matches("LINHAS\\s+\\d+", lineZero)) {
 			throw new InvalidFileException("A primeira linha deve ser no formato \"LINHAS 10\"");
 		}
-//		String lineZeroData[] = lineZero.split("\\s+");
-//		conjunto.setAmountLines(Integer.parseInt(lineZeroData[1]));
+		String lineZeroData[] = lineZero.split("\\s+");
+		ColumnSet conjunto = new ColumnSet(Long.parseLong(lineZeroData[1]));
 //		Integer amountLines = Integer.parseInt(lineZeroData[1]);
 
 		String lineOne = fileLines.get(1);
@@ -54,7 +53,7 @@ public class FileUtil {
 			String rotulo = dataLines[index++];
 			Double cost = Double.parseDouble(dataLines[index++]);
 			
-			Column column = new Column(rotulo, cost);
+			Column column = new Column(rotulo, cost, conjunto.getTotalLines());
 			
 			while (index++ < dataLines.length-1) {
 				Line linha = new Line(dataLines[index]);

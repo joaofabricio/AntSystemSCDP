@@ -5,6 +5,12 @@ import java.util.List;
 
 public class ColumnSet {
 	
+	private Long totalLines;
+
+	public ColumnSet(Long totalLines) {
+		this.totalLines = totalLines;
+	}
+	
 	private List<Column> columns = new ArrayList<Column>();
 	
 	public void addColumn(Column column) {
@@ -22,4 +28,9 @@ public class ColumnSet {
 		}
 		return cost;
 	}
+
+	public Long getTotalLines() {
+		return totalLines;
+	}
+	
 }
