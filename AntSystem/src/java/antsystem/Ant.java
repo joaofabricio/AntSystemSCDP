@@ -1,6 +1,7 @@
 package antsystem;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import setcovering.Column;
@@ -21,8 +22,11 @@ public class Ant {
 		
 		while (!coverAllLines(bestSolution)) {
 			Column column = chooseColumn(alfa, beta);
+			System.out.println("coluna escolhida: "+column);
 			
 			bestSolution.addColumn(column);
+			
+			System.out.println("solution: "+bestSolution);
 			
 		}
 		
@@ -44,7 +48,7 @@ public class Ant {
 			set.addAll(column.getLines());
 		}
 		
-		return set.size() == totalColumns.getTotalLines();
+		return set.size() == totalColumns.getTotalLines()-1;
 	}
 
 	private Column chooseColumn(Double alfa, Double beta) {
@@ -56,17 +60,13 @@ public class Ant {
 		
 		double randomNumber = Math.random();
 		
+		Column choosed = null; 
 		double ac = 0;
-		Column choosed = null;
-		for (Column column : totalColumns.getColumns()) {
-			ac += column.getProb(); 
-			if (ac >= randomNumber && 
-				!bestSolution.getColumns().contains(column)) {
-				choosed = column;
-				break;
-			}
+		Iterator<Column> columns = totalColumns.getColumns().iterator();
+		while (ac < randomNumber && columns.hasNext()) {
+			choosed = columns.next();
+			ac += choosed.getProb();
 		}
-		
 		return choosed;
 	}
 

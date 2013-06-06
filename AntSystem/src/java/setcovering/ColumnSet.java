@@ -1,7 +1,8 @@
 package setcovering;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ColumnSet {
 	
@@ -11,13 +12,13 @@ public class ColumnSet {
 		this.totalLines = totalLines;
 	}
 	
-	private List<Column> columns = new ArrayList<Column>();
+	private Set<Column> columns = new HashSet<Column>();
 	
 	public void addColumn(Column column) {
 		columns.add(column);
 	}
 	
-	public List<Column> getColumns() {
+	public Set<Column> getColumns() {
 		return columns;
 	}
 	
@@ -31,6 +32,20 @@ public class ColumnSet {
 
 	public Long getTotalLines() {
 		return totalLines;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.getCost());
+		sb.append("[");
+		Iterator<Column> i = columns.iterator();
+		while(i.hasNext()) {
+			sb.append(i.next()).append(",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		sb.append("]");
+		return sb.toString();
 	}
 	
 }

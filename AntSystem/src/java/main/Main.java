@@ -17,12 +17,8 @@ public class Main {
 		
 		ColumnSet best = asscp.execute(columnSet);
 		
-		for (Column column : best.getColumns()) {
-			System.out.println(column.getLabel());
-		}
-		
 		System.out.println("****");
-		System.out.println("Custo total "+best.getCost());
+		System.out.println("Solução: "+best);
 	}
 
 }
