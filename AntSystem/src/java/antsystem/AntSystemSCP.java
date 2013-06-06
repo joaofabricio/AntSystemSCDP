@@ -1,10 +1,14 @@
 package antsystem;
 
+import java.util.logging.Logger;
+
 import setcovering.ColumnSet;
 
 
 public class AntSystemSCP {
 	
+	private static final Logger LOG = Logger.getLogger(AntSystemSCP.class.getPackage().getName());
+
 	private Double alfa;
 	
 	private Double beta;
@@ -17,6 +21,14 @@ public class AntSystemSCP {
 	
 	private Integer antPopulation = 50;
 
+	/**
+	 * 
+	 * @param alfa
+	 * @param beta
+	 * @param ro
+	 * @param maxIter
+	 * @param q
+	 */
 	public AntSystemSCP(Double alfa,
 						Double beta, 
 						Double ro, 
@@ -36,8 +48,9 @@ public class AntSystemSCP {
 		for (int i = 0; i < maxIter; i++) {
 			for (int f = 0; f < antPopulation; f++) {
 				Ant ant  = new Ant(totalColumns);
-				ColumnSet partialSolution = ant.run(alfa, beta, ro, q);
-				
+				ColumnSet partialSolution = ant.run(alfa, beta, q);
+				LOG.info("Partial solution: "+partialSolution);
+				totalColumns.evaporePheromone(ro);
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;
 				}

@@ -16,7 +16,7 @@ public class Column {
 	
 	private double prob;
 
-	private double pheromone = 1;//TODO feromonio inicial
+	private double pheromone = 0.00001d;//TODO feromonio inicial
 	
 	public Column(String rotulo, Double custo, Long totalLines) {
 		this.label = rotulo;
@@ -44,10 +44,14 @@ public class Column {
 		lines.add(l);
 	}
 	
-	public void incPheromone(Double q, Double solutionCost, double ro) {
+	public void incPheromone(Double q, Double solutionCost) {
 		double antPheromone = q / solutionCost;
-		//ro*pheromone = evaporação
-		pheromone = (ro * pheromone) + antPheromone;
+//		BigDecimal evaporation = new BigDecimal(ro * pheromone);
+		pheromone += antPheromone;
+	}
+	
+	public void evaporePheromone(double ro) {
+		pheromone *= ro;
 	}
 	
 	public double getPheromone() {
@@ -82,28 +86,23 @@ public class Column {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Column other = (Column) obj;
-		if (cost == null) {
-			if (other.cost != null)
-				return false;
-		} else if (!cost.equals(other.cost))
-			return false;
 		if (label == null) {
-			if (other.label != null)
+			if (other.label != null) {
 				return false;
-		} else if (!label.equals(other.label))
+			}
+		} else if (!label.equals(other.label)) {
 			return false;
-		if (lines == null) {
-			if (other.lines != null)
-				return false;
-		} else if (!lines.equals(other.lines))
-			return false;
+		}
 		return true;
 	}
 	

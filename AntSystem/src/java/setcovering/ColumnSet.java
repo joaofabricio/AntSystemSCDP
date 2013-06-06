@@ -12,9 +12,17 @@ public class ColumnSet {
 		this.totalLines = totalLines;
 	}
 	
+	public ColumnSet(ColumnSet columnSet) {
+		this.totalLines = columnSet.getTotalLines();
+		this.cost = columnSet.getCost();
+		this.columns.addAll(columnSet.getColumns());
+	}
+
 	private Set<Column> columns = new HashSet<Column>();
+	private Double cost = 0d;
 	
 	public void addColumn(Column column) {
+		cost += column.getCost();
 		columns.add(column);
 	}
 	
@@ -23,10 +31,6 @@ public class ColumnSet {
 	}
 	
 	public Double getCost() {
-		Double cost = 0d;
-		for (Column column : columns) {
-			cost += column.getCost();
-		}
 		return cost;
 	}
 
@@ -38,14 +42,23 @@ public class ColumnSet {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(this.getCost());
-		sb.append("[");
+		sb.append('[');
 		Iterator<Column> i = columns.iterator();
 		while(i.hasNext()) {
-			sb.append(i.next()).append(",");
+			sb.append(i.next()).append(',');
 		}
 		sb.deleteCharAt(sb.length()-1);
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
+	}
+
+	public void evaporePheromone(double ro) {
+		Iterator<Column> it = columns.iterator();
+		while (it.hasNext()) {
+			Column column = it.next();
+			column.evaporePheromone(ro);
+		}
+		
 	}
 	
 }

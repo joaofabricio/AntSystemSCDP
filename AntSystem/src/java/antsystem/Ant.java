@@ -3,6 +3,7 @@ package antsystem;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import setcovering.Column;
 import setcovering.ColumnSet;
@@ -10,34 +11,36 @@ import setcovering.Line;
 
 public class Ant {
 	
+	private static final Logger LOG = Logger.getLogger(Ant.class.getPackage().getName()); 
+	
 	private ColumnSet bestSolution;
 	private ColumnSet totalColumns;
 	
 	public Ant(ColumnSet totalColumns) {
-		this.totalColumns = totalColumns;
+		this.totalColumns = new ColumnSet(totalColumns);
 		bestSolution = new ColumnSet(totalColumns.getTotalLines());
 	}
 
-	public ColumnSet run(Double alfa, Double beta, Double ro, Double q) {
+	public ColumnSet run(Double alfa, Double beta, Double q) {
 		
 		while (!coverAllLines(bestSolution)) {
 			Column column = chooseColumn(alfa, beta);
-			System.out.println("coluna escolhida: "+column);
+			LOG.fine("coluna escolhida: "+column);
 			
 			bestSolution.addColumn(column);
 			
-			System.out.println("solution: "+bestSolution);
+			LOG.fine("solution: "+bestSolution);
 			
 		}
 		
-		updatePheromone(ro, q);
+		updatePheromone(q);
 		
 		return bestSolution;
 	}
 
-	private void updatePheromone(Double ro, Double q) {
+	private void updatePheromone(Double q) {
 		for (Column column : bestSolution.getColumns()) {
-			column.incPheromone(q, bestSolution.getCost(), ro);
+			column.incPheromone(q, bestSolution.getCost());
 		}
 		
 	}
@@ -62,6 +65,7 @@ public class Ant {
 		
 		Column choosed = null; 
 		double ac = 0;
+		totalColumns.getColumns().removeAll(bestSolution.getColumns());
 		Iterator<Column> columns = totalColumns.getColumns().iterator();
 		while (ac < randomNumber && columns.hasNext()) {
 			choosed = columns.next();
@@ -74,7 +78,7 @@ public class Ant {
 		double sumProbs = 0;
 		for (Column column : totalColumns.getColumns()) {
 			sumProbs += Math.pow(column.getPheromone(), alfa) +
-					Math.pow(column.getVisibility(), beta);
+						Math.pow(column.getVisibility(), beta);
 		}
 		
 		for (Column column : totalColumns.getColumns()) {
