@@ -15,9 +15,12 @@ public class Ant {
 	
 	private ColumnSet bestSolution;
 	private ColumnSet totalColumns;
+
+	private ColumnSet notChoosedColumns;
 	
 	public Ant(ColumnSet totalColumns) {
-		this.totalColumns = new ColumnSet(totalColumns);
+		this.totalColumns = totalColumns;
+		notChoosedColumns = new ColumnSet(totalColumns);
 		bestSolution = new ColumnSet(totalColumns.getTotalLines());
 	}
 
@@ -51,7 +54,7 @@ public class Ant {
 			set.addAll(column.getLines());
 		}
 		
-		return set.size() == totalColumns.getTotalLines()-1;
+		return set.size() == totalColumns.getTotalLines();
 	}
 
 	private Column chooseColumn(Double alfa, Double beta) {
@@ -60,17 +63,18 @@ public class Ant {
 		
 		calculateProb(alfa, beta);
 		
+		Column choosed = null;
 		
-		double randomNumber = Math.random();
-		
-		Column choosed = null; 
-		double ac = 0;
-		totalColumns.getColumns().removeAll(bestSolution.getColumns());
-		Iterator<Column> columns = totalColumns.getColumns().iterator();
-		while (ac < randomNumber && columns.hasNext()) {
-			choosed = columns.next();
-			ac += choosed.getProb();
-		}
+//		while (choosed == null) {
+			double randomNumber = Math.random();
+			double ac = 0;
+			Iterator<Column> columns = notChoosedColumns.getColumns().iterator();
+			while (ac < randomNumber && columns.hasNext()) {
+				choosed = columns.next();
+				ac += choosed.getProb();
+			}
+//		}
+		notChoosedColumns.getColumns().remove(choosed);
 		return choosed;
 	}
 

@@ -19,7 +19,7 @@ public class AntSystemSCP {
 	
 	private Double q;
 	
-	private Integer antPopulation = 50;
+	private Integer antPopulation = 10;
 
 	/**
 	 * 

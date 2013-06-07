@@ -22,8 +22,8 @@ public class Main {
 		double alfa = 1d;
 		double beta = 1d;
 		double ro = 0.8d;
-		int maxIter = 50;
-		double q = 1d;
+		int maxIter = 10;
+		double q = 10d;
 		AntSystemSCP asscp = new AntSystemSCP(alfa, beta, ro, maxIter, q);
 		
 		Long t1 = Calendar.getInstance().getTimeInMillis();
@@ -33,8 +33,6 @@ public class Main {
 		LOG.info("****");
 		LOG.info("Solução: "+best);
 		
-		JPanel p = new JPanel();
-		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 	}
 
 }

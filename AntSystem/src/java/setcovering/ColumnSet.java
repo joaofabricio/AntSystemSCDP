@@ -22,8 +22,10 @@ public class ColumnSet {
 	private Double cost = 0d;
 	
 	public void addColumn(Column column) {
-		cost += column.getCost();
-		columns.add(column);
+		if (column != null) {
+			cost += column.getCost();
+			columns.add(column);
+		}
 	}
 	
 	public Set<Column> getColumns() {
