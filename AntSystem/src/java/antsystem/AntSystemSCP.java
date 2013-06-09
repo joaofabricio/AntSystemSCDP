@@ -47,6 +47,7 @@ public class AntSystemSCP {
 		
 		for (int i = 0; i < maxIter; i++) {
 			for (int f = 0; f < antPopulation; f++) {
+				
 				Ant ant  = new Ant(totalColumns);
 				ColumnSet partialSolution = ant.run(alfa, beta, q);
 				LOG.info("Partial solution: "+partialSolution);
@@ -54,6 +55,7 @@ public class AntSystemSCP {
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;
 				}
+				
 				
 			}
 		}

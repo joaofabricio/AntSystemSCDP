@@ -2,7 +2,9 @@ package setcovering;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class Column {
 	
@@ -12,8 +14,6 @@ public class Column {
 	
 	private List<Line> lines = new ArrayList<Line>();
 
-	private Long totalLines;
-	
 	private double prob;
 
 	private double pheromone = 0.00001d;//TODO feromonio inicial
@@ -21,7 +21,6 @@ public class Column {
 	public Column(String rotulo, Double custo, Long totalLines) {
 		this.label = rotulo;
 		this.cost = custo;
-		this.totalLines = totalLines;
 	}
 
 	public String getLabel() {
@@ -58,8 +57,15 @@ public class Column {
 		return pheromone;
 	}
 
-	public Double getVisibility() {
-		return new Double(lines.size() / totalLines);
+	public Double getVisibility(Set<Line> nonCoveredLines) {
+		int k = 0;
+		Iterator<Line> i = nonCoveredLines.iterator();
+		while(i.hasNext()) {
+			if (lines.contains(i.next())) {
+				k++;
+			}
+		}
+		return new Double(k / cost);
 	}
 
 	public double getProb() {
@@ -109,5 +115,9 @@ public class Column {
 	@Override
 	public String toString() {
 		return label;
+	}
+
+	public boolean cover(Line line) {
+		return lines.contains(line);
 	}
 }

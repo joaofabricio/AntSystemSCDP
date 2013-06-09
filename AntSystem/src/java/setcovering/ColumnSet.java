@@ -1,5 +1,6 @@
 package setcovering;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
 public class ColumnSet {
 	
 	private Long totalLines;
-
+	
 	public ColumnSet(Long totalLines) {
 		this.totalLines = totalLines;
 	}
@@ -20,11 +21,13 @@ public class ColumnSet {
 
 	private Set<Column> columns = new HashSet<Column>();
 	private Double cost = 0d;
+	private Set<Line> coveredLines = new HashSet<Line>();
 	
 	public void addColumn(Column column) {
 		if (column != null) {
 			cost += column.getCost();
 			columns.add(column);
+			coveredLines.addAll(column.getLines());
 		}
 	}
 	
@@ -61,6 +64,10 @@ public class ColumnSet {
 			column.evaporePheromone(ro);
 		}
 		
+	}
+
+	public Collection<Line> getCoveredLines() {
+		return coveredLines;
 	}
 	
 }

@@ -3,9 +3,6 @@ package main;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-
 import setcovering.ColumnSet;
 import antsystem.AntSystemSCP;
 
@@ -29,6 +26,7 @@ public class Main {
 		Long t1 = Calendar.getInstance().getTimeInMillis();
 		ColumnSet best = asscp.execute(columnSet);
 		Long t2 = Calendar.getInstance().getTimeInMillis();
+		
 		LOG.info("Tempo de execução: "+(t2-t1)+"ms");
 		LOG.info("****");
 		LOG.info("Solução: "+best);
