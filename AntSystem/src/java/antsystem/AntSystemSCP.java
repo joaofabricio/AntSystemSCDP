@@ -50,7 +50,7 @@ public class AntSystemSCP {
 				
 				Ant ant  = new Ant(totalColumns);
 				ColumnSet partialSolution = ant.run(alfa, beta, q);
-				LOG.info("Partial solution: "+partialSolution);
+				LOG.fine("Partial solution: "+partialSolution);
 				totalColumns.evaporePheromone(ro);
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;

@@ -10,7 +10,7 @@ public class Column {
 	
 	private String label;
 	
-	private Double cost;
+	private double cost;
 	
 	private List<Line> lines = new ArrayList<Line>();
 
@@ -31,7 +31,7 @@ public class Column {
 		this.label = label;
 	}
 	
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
 	
@@ -45,7 +45,6 @@ public class Column {
 	
 	public void incPheromone(Double q, Double solutionCost) {
 		double antPheromone = q / solutionCost;
-//		BigDecimal evaporation = new BigDecimal(ro * pheromone);
 		pheromone += antPheromone;
 	}
 	
@@ -84,9 +83,7 @@ public class Column {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cost == null) ? 0 : cost.hashCode());
 		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		result = prime * result + ((lines == null) ? 0 : lines.hashCode());
 		return result;
 	}
 

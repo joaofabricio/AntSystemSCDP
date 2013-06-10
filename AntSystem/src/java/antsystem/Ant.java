@@ -17,9 +17,9 @@ public class Ant {
 
 	private ColumnSet notChoosedColumns;
 
-	private Collection<Line> coveredLines = new HashSet<>();
+	private Collection<Line> coveredLines = new HashSet<Line>();
 
-	private Set<Line> nonCoveredLines = new HashSet<>();
+	private Collection<Line> nonCoveredLines = new HashSet<Line>();
 
 	public Ant(ColumnSet totalColumns) {
 		this.totalColumns = totalColumns;

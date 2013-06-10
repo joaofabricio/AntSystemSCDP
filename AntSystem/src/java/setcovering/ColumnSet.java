@@ -20,7 +20,7 @@ public class ColumnSet {
 	}
 
 	private Set<Column> columns = new HashSet<Column>();
-	private Double cost = 0d;
+	private double cost = 0d;
 	private Set<Line> coveredLines = new HashSet<Line>();
 	
 	public void addColumn(Column column) {
