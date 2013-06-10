@@ -1,6 +1,7 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ import setcovering.Line;
 
 public class FileUtil {
 	
-	public static ColumnSet readFile(String fileName) {
+	public static ColumnSet readFile(File file) {
 		
-		List<String> fileLines = separaLinhasArquivo(fileName);
+		List<String> fileLines = divideFileLines(file);
 		
 		String lineZero = fileLines.get(0);
 		if (!Pattern.matches("LINHAS\\s+\\d+", lineZero)) {
@@ -80,15 +81,15 @@ public class FileUtil {
 		return columnSet;
 	}
 
-	public static List<String> separaLinhasArquivo(String nomeArquivo) {
-		List<String> linhas = new ArrayList<String>();
+	public static List<String> divideFileLines(File file) {
+		List<String> lines = new ArrayList<String>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(nomeArquivo));
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			while (br.ready()) {
-				linhas.add(br.readLine());
+				lines.add(br.readLine());
 			}
 			br.close();
-			return linhas;
+			return lines;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

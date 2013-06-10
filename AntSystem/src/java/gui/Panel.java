@@ -1,36 +1,73 @@
 package gui;
 
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
 
-public class Panel extends JFrame implements ActionListener {
+import main.FileUtil;
+import setcovering.ColumnSet;
+import antsystem.AntSystemSCP;
+import antsystem.BestSolution;
+
+public class Panel extends JFrame implements ActionListener, PropertyChangeListener {
 
 	private static final long serialVersionUID = -3317813288766774217L;
+	
+	private static final Logger LOG = Logger.getLogger(Panel.class.getPackage().getName());
 
 	JButton openButton;
 	JFileChooser fc;
+
+	private int maxIter = 10;
+
+	private JProgressBar progressBar;
+
+	private JTextArea textArea;
 
 	public Panel() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		//File Chooser
 		fc = new JFileChooser();
 		openButton = new JButton("Open a File...");
 		openButton.addActionListener(this);
 
-		JPanel buttonPanel = new JPanel(); // use FlowLayout
+		//botão
+		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(openButton);
 
 		add(buttonPanel, BorderLayout.PAGE_START);
 
+		//barra de progresso
+		progressBar = new JProgressBar(0, maxIter);
+		progressBar.setStringPainted(true);
+		progressBar.setValue(0);
+		progressBar.setBounds(0, 35, 300, 20);
+		add(progressBar, BorderLayout.AFTER_LAST_LINE);
+//		progressBar.setValue(n)
+		
+		
+		textArea = new JTextArea();
+		textArea.setBounds(0, 75, 300, 100);
+		add(textArea);
+		
 		pack();
 		setBounds(new Rectangle(300, 300));
 		setLocationRelativeTo(null);
@@ -42,21 +79,30 @@ public class Panel extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Handle open button action.
 		if (e.getSource() == openButton) {
 			int returnVal = fc.showOpenDialog(Panel.this);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				// This is where a real application would open the file.
-//				log.append("Opening: " + file.getName() + "." + newline);
-				System.out.println("open");
-			} else {
-//				log.append("Open command cancelled by user." + newline);
-			}
-//			log.setCaretPosition(log.getDocument().getLength());
+				
+				ColumnSet columnSet = FileUtil.readFile(file);
 
-			// Handle save button action.
+				double alfa = 1d;
+				double beta = 1d;
+				double ro = 0.8d;
+				double q = 1d;
+				AntSystemSCP antSystem = new AntSystemSCP(alfa, beta, ro, maxIter, q);
+
+				antSystem.execute(columnSet, progressBar);
+				
+			}
+		}
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if (evt.getSource() == progressBar && BestSolution.getInstance().isAvaible()) {
+			textArea.setText(BestSolution.getInstance().getColumnSet().toString());
 		}
 	}
 
