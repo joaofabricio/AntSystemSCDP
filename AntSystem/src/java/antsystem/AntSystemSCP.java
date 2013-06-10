@@ -56,7 +56,6 @@ public class AntSystemSCP {
 					bestSolution = partialSolution;
 				}
 				
-				
 			}
 		}
 		

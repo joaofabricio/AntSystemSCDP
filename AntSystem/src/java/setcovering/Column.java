@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class Column {
+public class Column implements Comparable<Column> {
 	
 	private String label;
 	
@@ -116,5 +116,10 @@ public class Column {
 
 	public boolean cover(Line line) {
 		return lines.contains(line);
+	}
+
+	@Override
+	public int compareTo(Column o) {
+		return (new Integer(this.label)).compareTo(new Integer(o.label));
 	}
 }

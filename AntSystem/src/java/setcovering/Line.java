@@ -1,6 +1,6 @@
 package setcovering;
 
-public class Line implements Comparable<Line> {
+public class Line {
 	
 	private String label;
 
@@ -46,9 +46,4 @@ public class Line implements Comparable<Line> {
 		return true;
 	}
 
-	@Override
-	public int compareTo(Line o) {
-		return this.label.compareTo(o.getLabel());
-	}
-	
 }

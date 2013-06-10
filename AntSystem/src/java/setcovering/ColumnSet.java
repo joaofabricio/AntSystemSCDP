@@ -3,6 +3,7 @@ package setcovering;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 public class ColumnSet {
@@ -19,7 +20,7 @@ public class ColumnSet {
 		this.columns.addAll(columnSet.getColumns());
 	}
 
-	private Set<Column> columns = new HashSet<Column>();
+	private Collection<Column> columns = new PriorityQueue<Column>();
 	private double cost = 0d;
 	private Set<Line> coveredLines = new HashSet<Line>();
 	
@@ -31,7 +32,7 @@ public class ColumnSet {
 		}
 	}
 	
-	public Set<Column> getColumns() {
+	public Collection<Column> getColumns() {
 		return columns;
 	}
 	

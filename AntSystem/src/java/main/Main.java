@@ -19,7 +19,7 @@ public class Main {
 		double alfa = 1d;
 		double beta = 1d;
 		double ro = 0.8d;
-		int maxIter = 50;
+		int maxIter = 10;
 		double q = 1d;
 		AntSystemSCP asscp = new AntSystemSCP(alfa, beta, ro, maxIter, q);
 		
