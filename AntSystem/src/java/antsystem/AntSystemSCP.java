@@ -55,7 +55,9 @@ public class AntSystemSCP implements Runnable {
 	public void run() {
 		ColumnSet bestSolution = totalColumns;
 
-		for (int i = 0; i < maxIter; i++) {
+//		for (int i = 0; i < maxIter; i++) {
+		int i = 0;
+		while (i++<maxIter) {
 			for (int f = 0; f < antPopulation; f++) {
 
 				Ant ant = new Ant(totalColumns);
@@ -64,8 +66,9 @@ public class AntSystemSCP implements Runnable {
 				totalColumns.evaporePheromone(ro);
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;
+					i=0;
 				}
-				System.out.println(partialSolution.getCost());
+				System.out.println(partialSolution.getCost().intValue()+"|min:"+bestSolution.getCost().intValue());
 			}
 			progressBar.setValue(i+1);
 //			LOG.info("Iteração "+i+": "+bestSolution);

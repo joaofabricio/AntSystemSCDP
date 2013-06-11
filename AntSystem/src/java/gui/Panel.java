@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -13,12 +12,9 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
 
 import main.FileUtil;
 import setcovering.ColumnSet;
@@ -80,6 +76,7 @@ public class Panel extends JFrame implements ActionListener, PropertyChangeListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == openButton) {
+			progressBar.setValue(0);
 			int returnVal = fc.showOpenDialog(Panel.this);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -90,7 +87,7 @@ public class Panel extends JFrame implements ActionListener, PropertyChangeListe
 				double alfa = 1d;
 				double beta = 1d;
 				double ro = 0.8d;
-				double q = 1d;
+				double q = 100000d;
 				AntSystemSCP antSystem = new AntSystemSCP(alfa, beta, ro, maxIter, q);
 
 				antSystem.execute(columnSet, progressBar);
