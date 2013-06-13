@@ -1,13 +1,14 @@
-package antsystem;
+package br.com.joaofabricio.antsystemscp.antsystem;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import setcovering.Column;
-import setcovering.ColumnSet;
-import setcovering.Line;
+import br.com.joaofabricio.antsystemscp.setcovering.Column;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.setcovering.Line;
+
 
 public class Ant {
 

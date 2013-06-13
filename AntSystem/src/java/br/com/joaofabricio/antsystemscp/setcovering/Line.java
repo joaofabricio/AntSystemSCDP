@@ -1,4 +1,4 @@
-package setcovering;
+package br.com.joaofabricio.antsystemscp.setcovering;
 
 public class Line {
 	

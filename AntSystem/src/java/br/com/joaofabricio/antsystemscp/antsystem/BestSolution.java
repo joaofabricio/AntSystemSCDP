@@ -1,6 +1,6 @@
-package antsystem;
+package br.com.joaofabricio.antsystemscp.antsystem;
 
-import setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
 
 public final class BestSolution {
 	

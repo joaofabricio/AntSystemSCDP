@@ -1,4 +1,4 @@
-package gui;
+package br.com.joaofabricio.antsystemscp.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,16 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
-import main.FileUtil;
-import setcovering.ColumnSet;
-import antsystem.AntSystemSCP;
-import antsystem.BestSolution;
+import br.com.joaofabricio.antsystemscp.antsystem.AntSystemSCP;
+import br.com.joaofabricio.antsystemscp.antsystem.BestSolution;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.util.FileUtil;
+
 
 public class Panel extends JFrame implements ActionListener, PropertyChangeListener {
 
 	private static final long serialVersionUID = -3317813288766774217L;
 	
-	private static final Logger LOG = Logger.getLogger(Panel.class.getPackage().getName());
+//	private static final Logger LOG = Logger.getLogger(Panel.class.getPackage().getName());
 
 	JButton openButton;
 	JFileChooser fc;

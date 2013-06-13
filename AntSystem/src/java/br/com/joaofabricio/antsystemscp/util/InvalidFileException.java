@@ -1,4 +1,4 @@
-package main;
+package br.com.joaofabricio.antsystemscp.util;
 
 public class InvalidFileException extends RuntimeException {
 

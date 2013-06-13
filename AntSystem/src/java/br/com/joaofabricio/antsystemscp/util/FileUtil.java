@@ -1,4 +1,4 @@
-package main;
+package br.com.joaofabricio.antsystemscp.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import setcovering.Column;
-import setcovering.ColumnSet;
-import setcovering.Line;
+import br.com.joaofabricio.antsystemscp.setcovering.Column;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.setcovering.Line;
+
 
 public class FileUtil {
 	

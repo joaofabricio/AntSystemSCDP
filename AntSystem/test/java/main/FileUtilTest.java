@@ -6,7 +6,9 @@ import java.io.File;
 
 import org.junit.Test;
 
-import setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.util.FileUtil;
+
 
 public class FileUtilTest {
 	

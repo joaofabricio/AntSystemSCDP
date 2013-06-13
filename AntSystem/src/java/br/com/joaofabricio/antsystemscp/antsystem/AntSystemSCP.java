@@ -1,10 +1,11 @@
-package antsystem;
+package br.com.joaofabricio.antsystemscp.antsystem;
 
 import java.util.logging.Logger;
 
 import javax.swing.JProgressBar;
 
-import setcovering.ColumnSet;
+import br.com.joaofabricio.antsystemscp.setcovering.ColumnSet;
+
 
 public class AntSystemSCP implements Runnable {
 
