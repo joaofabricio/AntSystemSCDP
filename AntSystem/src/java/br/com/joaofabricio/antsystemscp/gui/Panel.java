@@ -87,7 +87,9 @@ public class Panel extends JFrame implements ActionListener, PropertyChangeListe
 				double alfa = 1d;
 				double beta = 1d;
 				double ro = 0.8d;
-				double q = 100000d;
+				double q = 25000d;
+				
+				maxIter = 10;
 				AntSystemSCP antSystem = new AntSystemSCP(alfa, beta, ro, maxIter, q);
 
 				antSystem.execute(columnSet, progressBar);
@@ -95,7 +97,6 @@ public class Panel extends JFrame implements ActionListener, PropertyChangeListe
 			}
 		}
 	}
-
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getSource() == progressBar && BestSolution.getInstance().isAvaible()) {

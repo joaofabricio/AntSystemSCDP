@@ -48,6 +48,7 @@ public class AntSystemSCP implements Runnable {
 	public void execute(ColumnSet totalColumns, JProgressBar p) {
 		this.totalColumns = totalColumns;
 		this.progressBar = p;
+		p.setMaximum(maxIter);
 		Thread t = new Thread(this);
 		t.start();
 	}
@@ -56,9 +57,9 @@ public class AntSystemSCP implements Runnable {
 	public void run() {
 		ColumnSet bestSolution = totalColumns;
 
-//		for (int i = 0; i < maxIter; i++) {
-		int i = 0;
-		while (i++<maxIter) {
+		for (int i = 0; i < maxIter; i++) {
+//		int i = 0;
+//		while (i++<maxIter) {
 			for (int f = 0; f < antPopulation; f++) {
 
 				Ant ant = new Ant(totalColumns);
@@ -67,9 +68,9 @@ public class AntSystemSCP implements Runnable {
 				totalColumns.evaporePheromone(ro);
 				if (partialSolution.getCost() < bestSolution.getCost()) {
 					bestSolution = partialSolution;
-					i=0;
+//					i=0;
 				}
-				System.out.println(partialSolution.getCost().intValue()+"|min:"+bestSolution.getCost().intValue());
+				System.out.println(partialSolution.getCost().intValue());
 			}
 			progressBar.setValue(i+1);
 //			LOG.info("Iteração "+i+": "+bestSolution);
